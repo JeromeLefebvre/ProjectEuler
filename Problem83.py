@@ -19,7 +19,6 @@ Find the minimal path sum, in matrix.txt (right click and 'Save Link/Target As..
 '''
 Notes on problem 83():
 '''
-from projectEuler import primes
 from copy import deepcopy
 #best = [[0 for j in range(0,width)] for i in range(0,width)]
 #know = [[False for j in range(0,width)] for i in range(0,width)]

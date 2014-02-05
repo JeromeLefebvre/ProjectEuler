@@ -12,7 +12,6 @@ Although there exists no rectangular grid that contains exactly two million rect
 '''
 Notes on problem 85():
 '''
-from projectEuler import primes
 
 def numberOfSquares(x,y):
 	total = 0
@@ -24,14 +23,16 @@ def numberOfSquares(x,y):
 def problem85():
 	record = 1000000000000
 	xy = 1
-	for x in range(1,200):
-		for y in range(1,200):
+	for x in range(1,50):
+		for y in range(x,100):
 			r = numberOfSquares(x,y)
 			if abs(2*10**6 - r) < record:
 				record = abs(2*10**6 - r)
 				xy = x*y
 	return xy
 
+from cProfile import run
 if __name__ == "__main__":
-	print(problem85())
+	run("problem85()")
+	print(problem85() == 2772)
  

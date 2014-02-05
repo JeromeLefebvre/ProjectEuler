@@ -14,9 +14,9 @@ For the first one hundred natural numbers, find the total of the digital sums of
 '''
 Notes on problem 80():
 '''
-from projectEuler import applyToDigits, isSquare, applyToDigits
+from projectEuler import isSquare
 
-from decimal import *
+from decimal import Decimal, getcontext
 
 #def decimalSum(n):
 #	return sum([int(b) for b in str(n)])
@@ -31,6 +31,8 @@ def problem80():
 			total += sum(int(c) for c in str(b * 10**100)[:100])
 	return total
 
+from cProfile import run
 if __name__ == "__main__":
-	print(problem80())
+	run("problem80()")
+	print(problem80() == 40886)
  

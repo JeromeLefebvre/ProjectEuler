@@ -22,23 +22,8 @@ Notes on problem 81():
 #!/usr/local/bin/python3.3
 
 '''
-Problem 81
-In the 5 by 5 matrix below, the minimal path sum from the top left to the bottom right, by only moving to the right and down, is indicated in bold red and is equal to 2427.
-
-
-131	673	234	103	18
-201	96	342	965	150
-630	803	746	422	111
-537	699	497	121	956
-805	732	524	37	331
-
-Find the minimal path sum, in matrix.txt (right click and 'Save Link/Target As...'), a 31K text file containing a 80 by 80 matrix, from the top left to the bottom right by only moving right and down.
-'''
-
-'''
 Notes on problem 81():
 '''
-from projectEuler import primes
 
 def problem82():
 	testData = '''4445,2697,5115,718,2209,2212,654,4348,3079,6821,7668,3276,8874,4190,3785,2752,9473,7817,9137,496,7338,3434,7152,4355,4552,7917,7827,2460,2350,691,3514,5880,3145,7633,7199,3783,5066,7487,3285,1084,8985,760,872,8609,8051,1134,9536,5750,9716,9371,7619,5617,275,9721,2997,2698,1887,8825,6372,3014,2113,7122,7050,6775,5948,2758,1219,3539,348,7989,2735,9862,1263,8089,6401,9462,3168,2758,3748,5870
@@ -123,8 +108,7 @@ def problem82():
 5304,5499,564,2801,679,2653,1783,3608,7359,7797,3284,796,3222,437,7185,6135,8571,2778,7488,5746,678,6140,861,7750,803,9859,9918,2425,3734,2698,9005,4864,9818,6743,2475,132,9486,3825,5472,919,292,4411,7213,7699,6435,9019,6769,1388,802,2124,1345,8493,9487,8558,7061,8777,8833,2427,2238,5409,4957,8503,3171,7622,5779,6145,2417,5873,5563,5693,9574,9491,1937,7384,4563,6842,5432,2751,3406,7981'''
 	matrix = [[int(r) for r in row.split(',')] for row in testData.split('\n')]
 	width = len(matrix[0])
-	for r in matrix:
-		print(r)
+
 	# Starting from the last colum going to the first
 	for j in range(width-2,-1,-1):
 		choice = {}
@@ -152,6 +136,8 @@ def problem82():
 
 	return min(matrix[i][0] for i in range(0,width))
 
+from cProfile import run
 if __name__ == "__main__":
-	print(problem82())
+	run("problem82()")
+	print(problem82() == 260324)
  

@@ -89,10 +89,14 @@ def problem84():
 	chance = deck( ['GO','JAIL', 'C1','E3','H2','R1','NR','NR','NU','-3'])	
 	b =  board(communityChest, chance)
 	b.move()
-	for i in range(1,10**6):
+	for i in range(1,10**7):
 		b.move()
-	print(b.statistic())
+	a = b.statistic()
+	return a[0]*10**4 + a[1]*10**2 + a[2]
 
+from cProfile import run
 if __name__ == "__main__":
-	print(problem84())
+	run("problem84()")
+	# Not guaranteed to get the correct answer
+	print(problem84() == 101524)
  

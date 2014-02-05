@@ -17,7 +17,6 @@ Find the minimal path sum, in matrix.txt (right click and 'Save Link/Target As..
 '''
 Notes on problem 81():
 '''
-from projectEuler import primes
 
 def problem81():
 	testData = '''4445,2697,5115,718,2209,2212,654,4348,3079,6821,7668,3276,8874,4190,3785,2752,9473,7817,9137,496,7338,3434,7152,4355,4552,7917,7827,2460,2350,691,3514,5880,3145,7633,7199,3783,5066,7487,3285,1084,8985,760,872,8609,8051,1134,9536,5750,9716,9371,7619,5617,275,9721,2997,2698,1887,8825,6372,3014,2113,7122,7050,6775,5948,2758,1219,3539,348,7989,2735,9862,1263,8089,6401,9462,3168,2758,3748,5870
@@ -118,13 +117,11 @@ def problem81():
 				matrix[i][j] += matrix[i+1][j]
 			else:
 				matrix[i][j] += min(matrix[i+1][j],matrix[i][j+1])
-		#print('*******************')
-		#for r in matrix:
-		#	print(r)
 	return matrix[0][0]
 
 
-
+from cProfile import run
 if __name__ == "__main__":
-	print(problem81())
+	run("problem81()")
+	print(problem81() == 427337)
  

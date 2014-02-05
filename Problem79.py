@@ -83,10 +83,10 @@ def problem79():
 	PossibleKeysSoFar = [c for c in permutations(['1','2','3','6','7','8','9','0'])]
 	for l in keylog.split('\n'):
 		PossibleKeysSoFar = mergeKey(PossibleKeysSoFar,l)
-		print(l)
-		print('***', PossibleKeysSoFar[0])
 	return int(''.join(PossibleKeysSoFar[0]))
 
+from cProfile import run
 if __name__ == "__main__":
-	print(problem79())
+	run("problem79()")
+	print(problem79() == 73162890)
  
