@@ -98,38 +98,11 @@ d = {1: (233168, True),
 197: (1.710637717, True),
 206: (1389019170, True)}
 
-'''
-Problem 1 Ran in 5.050969775766134e-06
-Problem 2 Ran in 0.0009467910276725888
-Problem 3 Ran in 0.27001978299813345
-Problem 4 Ran in 0.08041415404295549
-Problem 5 Ran in 2.502399729564786e-05
-Problem 6 Ran in 6.616103928536177e-05
-Problem 7 Ran in 0.24788817402441055
-Problem 8 Ran in 0.004701603029388934
-Problem 9 Ran in 0.10268057201756164
-Problem 10 Ran in 0.26801357202930376
-Problem 11 Ran in 0.0031050319666974247
-Problem 12 Ran in 6.37416140595451
-Problem 13 Ran in 9.44779603742063e-05
-Problem 14 Ran in 5.535212854971178
-Problem 15 Ran in 0.0004050339921377599
-Problem 16 Ran in 0.00012366700684651732
-Problem 17 Ran in 0.004682193975895643
-Problem 18 Ran in 0.00021035503596067429
-Problem 19 Ran in 0.0006191250286065042
-Problem 20 Ran in 7.672596257179976e-05
-Problem 21 Ran in 40.840024453995284
-Problem 22 Ran in 0.015475714986678213
-Problem 24 Ran in 0.18576748296618462
-Problem 25 Ran in 0.001400795008521527
-Problem 26 Ran in 0.11766947497380897
-'''
 
 from importlib import import_module
 from timeit import timeit
-
-for problem in d:
+from itertools import dropwhile
+for problem in dropwhile(lambda x: x< 48, d):
 	if d[problem][1]:
 		TestAction = import_module("Problem"+str(problem))
 		function = getattr(TestAction,"problem"+str(problem))
