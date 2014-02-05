@@ -17,10 +17,10 @@ Find the least value of n for which p(n) is divisible by one million.
 '''
 Notes on problem 78():
 '''
-from projectEuler import primes
 
 '''
-	re the exponents of x on the right hand side are the generalized pentagonal numbers; i.e., numbers of the form ½m(3m − 1), where m is an integer. The signs in the summation alternate as (-1)m. This theorem can be used to derive a recurrence for the partition function:
+From wikipedia: http://en.wikipedia.org/wiki/Partition_(number_theory)
+The exponents of x on the right hand side are the generalized pentagonal numbers; i.e., numbers of the form ½m(3m − 1), where m is an integer. The signs in the summation alternate as (-1)m. This theorem can be used to derive a recurrence for the partition function:
 p(k) = p(k − 1) + p(k − 2) − p(k − 5) − p(k − 7) + p(k − 12) + p(k − 15) − p(k − 22) − ...
 '''
 def penta(m):
@@ -33,18 +33,19 @@ def p(n,_d = {0:1}):
 	total = 0
 	m = 1
 	while n - penta(m) >= 0:
-		total += (-1)**(m+1) * p(n - penta(m)) + (-1)**(m+1) * p(n - penta(-m))
+		total += ((-1)**(m+1) * p(n - penta(m)) + (-1)**(m+1) * p(n - penta(-m)))%10**6
 		m += 1
-	_d[n] = total
+	_d[n] = total % 10**6
 	return total
 
-
 def problem78():
-	n = 0
-	while p(n) % 10**6 != 0:
-		n+= 1
-	return n
+	from itertools import count
+	for n in count(4,5):
+		if p(n) % 10**6 == 0:
+			return n
 
-
+from cProfile import run
 if __name__ == "__main__":
-	print(problem78())
+	run("problem78()")
+	print(problem78() == 55374)
+	
