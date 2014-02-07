@@ -90,7 +90,101 @@ def iCube(max=10**1000):
 		yield n**3
 		n += 1		
 
+def isTriangle(a):
+	''' I.e. is there a solutin to a = n*(n+1)/2 in the positive integers?'''
+	return any(n >= 0 for n in solveIntegerQuadratic(1,1,-2*a))
 
+def isPentagonal(a):
+	return any(n > 0 for n in solveIntegerQuadratic(3,-1,-2*a))
+
+def isHexagonal(a):
+	return any(n > 0 for n in solveIntegerQuadratic(2,-1,-a))
+
+def isHeptagonal(a):
+	return any(n > 0 for n in solveIntegerQuadratic(5,-3,-2*a))
+
+def isOctagonal(a):
+	return any(n > 0 for n in solveIntegerQuadratic(3,-2,-a))
+
+def isSquare(a):
+	'''isSquare(int) -> int --  Returns the square root of a if a is a square in the positive integers, None otherwise'''
+	# If a is a small number, then we can do this quick version
+	if 0 <= a <= 2**50:
+		sr = int(a**(1/2))
+		if sr**2 == a:
+			return sr
+	# If a is large number, due to loss of precision, we use a purely integer solution, which is slower
+	else:
+		# Our first guess is that x is 'halfway' between 0 and n
+		x = a
+		y = (x + a // x) // 2
+		while y < x:
+			# Here we take the average between x and a//x and this becomes out new x
+			# with this, at every step x and a//x both approach the square root of n
+			# x from above, a//x from below
+			# y stands for the previous step
+			x = y
+			y = (x + a // x) // 2
+		if x**2 == a:
+			return x
+
+def solveIntegerLinear(a,b):
+	''' solveIntegerLinear(int, int) -> list -- Returns the integer solution to ax + b = 0 or an empty list'''
+	# all integers are solutions to 0x = 0
+	# so there is no good outputs to this
+	if a == 0 and b == 0:
+		raise ValueError
+	if -b % a == 0:
+		return [-b//a]
+	return []
+
+def solveIntegerQuadratic(a,b,c):
+	''' solveIntegerQuadratic(int,int,int) -> list -- Returns a list (sorted by size and possibly empty) of all possible integer roots (with multiplicity)  to the quadratic polynomial of the form ax^2 + bx + c'''
+	# Note, this is now a pure integer solution
+	# If a is zero, then we simply have a linear polynomial
+	if a == 0:
+		return solveIntegerLinear(b,c)
+	disc = b**2 - 4*a*c # The usual discriminant
+	soln = []
+	# We take the integer square of the disc
+	sd = isSquare(disc)
+	# We need to worry about the zero solution as 0 == False in python
+	if sd == 0 or sd:
+		# The two possible solutions
+		if (-b - sd) % (2*a) == 0:
+			soln.append((-b - sd) // (2*a))
+		if (-b + sd) % (2*a) == 0:
+			soln.append((-b + sd) // (2*a))
+	soln.sort()
+	return soln
+
+def isSquare(a):
+	'''isSquare(int) -> int --  Returns the square root of a if a is a square in the positive integers, None otherwise'''
+	# If a is a small number, then we can do this quick version
+	if 0 <= a <= 2**50:
+		sr = int(a**(1/2))
+		if sr**2 == a:
+			return sr
+	# If a is large number, due to loss of precision, we use a purely integer solution, which is slower
+	else:
+		# Our first guess is that x is 'halfway' between 0 and n
+		x = a
+		y = (x + a // x) // 2
+		while y < x:
+			# Here we take the average between x and a//x and this becomes out new x
+			# with this, at every step x and a//x both approach the square root of n
+			# x from above, a//x from below
+			# y stands for the previous step
+			x = y
+			y = (x + a // x) // 2
+		if x**2 == a:
+			return x
+
+
+def isTriangle(a):
+	'''isTriangle(int) -> bool -- True if there is a solution to a = n*(n+1)/2 in the positive integers'''
+	return any(n >= 0 for n in solveIntegerQuadratic(1,1,-2*a))
+	
 class TestSequenceFunctions(unittest.TestCase):
 	def setUp(self):
 		pass

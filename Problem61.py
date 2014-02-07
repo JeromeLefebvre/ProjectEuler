@@ -56,6 +56,6 @@ def problem61():
 
 from cProfile import run
 if __name__ == "__main__":
-	print(problem61() == 28684)
-	run("Problem61()")
+	print(problem61())
+	run("problem61()")
  

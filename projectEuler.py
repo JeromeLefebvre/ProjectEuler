@@ -91,15 +91,6 @@ def isLychrel(n):
 		n = n + int(str(n)[::-1])
 	return True
 
-def isTriangle(a):
-	''' I.e. is there a solutin to a = n*(n+1)/2 in the positive integers?'''
-	return any(n >= 0 for n in solveIntegerQuadratic(1,1,-2*a))
-
-def isPentagonal(a):
-	return any(n > 0 for n in solveIntegerQuadratic(3,-1,-2*a))
-
-def isHexagonal(a):
-	return any(n > 0 for n in solveIntegerQuadratic(2,-1,-a))
 
 def isDigit(n):
 	return all(str(n).count(a) == 1 for a in set(str(n)))

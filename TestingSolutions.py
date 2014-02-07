@@ -42,8 +42,8 @@ d = {1: (233168, True),
 40: (210, True), 
 41: (7652413, True), 
 42: (162, True), 
-43: (16695334890, True), ## Needs improvements
-44: (5482660, True), ## Needs improvements
+43: (16695334890, True),
+44: (5482660, True), 
 45: (1533776805, True),
 46: (5777, True),
 47: (134043, True),
@@ -53,13 +53,13 @@ d = {1: (233168, True),
 51: (121313, True), 
 52: (142857, True),
 53: (4075, True),
-#54: (-1, True), ## Not done
+54: (376, True), 
 55: (249, True), 
 56: (972, True),
 57: (153, True),
-58: (26241, True), ## clean up the code to use it in other problem 
-59: (107359, True), ## Needs work
-60: (26033, True), # Needs work
+58: (26241, True), 
+59: (107359, True),
+60: (26033, True), # Do not work on this!
 61: (28684, True),
 62: (127035954683, True), ## Needs a lot of work
 63: (49, True),
