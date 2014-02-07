@@ -21,35 +21,26 @@ from projectEuler import gcd
 from fractions import Fraction
 
 def problem71a():
-	seen = []
-	record = Fraction(1,8)
-	for d in range(1,10**6+1):
-		for n in range(int(record.numerator*(d+1)/d),int(3*d/7)):
-			if Fraction(n,d) < Fraction(3,7):
-				if Fraction(n,d) > record:
-					print(Fraction(n,d))
-					record = Fraction(n,d)
-			else:
-				break
-	return record.numerator
+    seen = []
+    record = 1/8
+    bestD = 8
+    bestN = 1
+    for d in range(1,10**6+1):
+        for n in range(int(bestN*(d+1)/d),int(3*d/7)):
+            if 7*n < 3*d:
+                if n/d > record:
+                    record = n/d
+                    bestD = d
+                    bestN = n
+            else:
+                break
+    return bestN
 
 def problem71():
-	seen = []
-	record = 1/8
-	bestD = 8
-	bestN = 1
-	for d in range(1,10**6+1):
-		for n in range(int(bestN*(d+1)/d),int(3*d/7)):
-			if 7*n < 3*d:
-				if n/d > record:
-					record = n/d
-					bestD = d
-					bestN = n
-			else:
-				break
-	return bestN
+    d = 10**6
+    return (3*d)//7 - 1
 
 from cProfile import run
 if __name__ == "__main__":
-	print(problem71() == 428570)
-	run("problem71()")
+    run("problem71()")
+    print(problem71() == 428570)
