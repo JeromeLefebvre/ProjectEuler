@@ -45,13 +45,63 @@ def problem73a():
 
 def problem73():
 	total = 0
-	for d in range(1,12000+1):
+	for d in range(1,1200+1):
 		for n in range(d//3-1,d//2+1):
 			if gcd(d,n) == 1 and n/d < 1/2 and n/d > 1/3:
 				total += 1
 	return total
 
+import itertools
+def pairwise(iterable):
+    "s -> (s0,s1), (s1,s2), (s2, s3), ..."
+    a, b = itertools.tee(iterable)
+    next(b, None)
+    return zip(a, b)
+
+def nextGen(tree):
+	newTree = []
+	for a,b in pairwise(tree):
+		newTree.append(a)
+		n = a.numerator + b.numerator
+		d = a.denominator + b.denominator
+		if d <= 60:
+			newTree.append( F(n,d) )
+	newTree.append(b)
+	return newTree
+
+def nextGen(tree):
+	for i in range(0,len(tree)):
+		a, b = tree[i],tree[i+1]
+		n = a.numerator + b.numerator
+		d = a.denominator + b.denominator
+		newEntry = F(n,d)
+		if newEntry.denominator <= 12000:
+			tree.insert(i,newEntry)
+
+from fractions import Fraction as F
+def problem73b():
+	tree = [F(1,3), F(1,2)]
+	for i in range(1,20):
+		nextGen(tree)
+	print(len( tree) - 2)
+
+def nextGen(tree):
+	for i in range(0,len(tree)-1):
+		a, b = tree[i],tree[i+1]
+		d = a + b
+		if d <= 100:
+			tree.insert(i,d)
+			i += 1
+
+from fractions import Fraction as F
+def problem73c():
+	tree = [3, 2]
+	for i in range(1,40):
+		nextGen(tree)
+	print(len( tree) - 2)
+
 from cProfile import run
 if __name__ == "__main__":
-	print(problem73() == 7295372)
-	run("problem73()")
+	print(problem73())
+	print(problem73c())# == 7295372)
+	#run("problem73()")
