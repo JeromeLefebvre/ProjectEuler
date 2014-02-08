@@ -17,17 +17,27 @@ How many elements would be contained in the set of reduced proper fractions for 
 Notes on problem 72():
 I love my new number generators!
 '''
-from projectEuler import phiFromFactors
-from factorGenerating import genFactors
-from fractions import Fraction
+
+def problem72a():
+    from projectEuler import phiFromFactors
+    from factorGenerating import genFactors
+    total = 0
+    for c in genFactors(10**6):
+        total += phiFromFactors(c)
+    return total
 
 def problem72():
-	total = 0
-	for c in genFactors(10**6):
-		total += phiFromFactors(c)
-	return total
+    total = 0
+    goal = 10**6
+    phi = list(range(0,goal+1))
+    for n in range(2,goal+1):
+        if n == phi[n]: # n is prime
+            for i in range(n,goal+1,n):
+                phi[i] *= (n - 1)/n
+        total += phi[n]
+    return int(total)
 
 from cProfile import run
 if __name__ == "__main__":
-	print(problem72() == 303963552391)
-	run("problem72()")
+    run("problem72()")
+    print(problem72() == 303963552391)
