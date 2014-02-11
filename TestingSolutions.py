@@ -102,7 +102,7 @@ d = {1: (233168, True),
 from importlib import import_module
 from timeit import timeit
 from itertools import dropwhile
-for problem in dropwhile(lambda x: x< 48, d):
+for problem in dropwhile(lambda x: x< 0, d):
 	if d[problem][1]:
 		TestAction = import_module("Problem"+str(problem))
 		function = getattr(TestAction,"problem"+str(problem))

@@ -26,110 +26,28 @@ What is the sum of all the minimal product-sum numbers for 2≤k≤12000?
 '''
 Notes on problem 88():
 '''
-from projectEuler import primes
 from factorGenerating import genFactors
 
-def algorithm_u(ns, m):
-    def visit(n, a):
-        ps = [[] for i in range(m)]
-        for j in range(n):
-            ps[a[j + 1]].append(ns[j])
-        return ps
-
-    def f(mu, nu, sigma, n, a):
-        if mu == 2:
-            yield visit(n, a)
-        else:
-            for v in f(mu - 1, nu - 1, (mu + sigma) % 2, n, a):
-                yield v
-        if nu == mu + 1:
-            a[mu] = mu - 1
-            yield visit(n, a)
-            while a[nu] > 0:
-                a[nu] = a[nu] - 1
-                yield visit(n, a)
-        elif nu > mu + 1:
-            if (mu + sigma) % 2 == 1:
-                a[nu - 1] = mu - 1
-            else:
-                a[mu] = mu - 1
-            if (a[nu] + sigma) % 2 == 1:
-                for v in b(mu, nu - 1, 0, n, a):
-                    yield v
-            else:
-                for v in f(mu, nu - 1, 0, n, a):
-                    yield v
-            while a[nu] > 0:
-                a[nu] = a[nu] - 1
-                if (a[nu] + sigma) % 2 == 1:
-                    for v in b(mu, nu - 1, 0, n, a):
-                        yield v
-                else:
-                    for v in f(mu, nu - 1, 0, n, a):
-                        yield v
-
-    def b(mu, nu, sigma, n, a):
-        if nu == mu + 1:
-            while a[nu] < mu - 1:
-                visit(n, a)
-                a[nu] = a[nu] + 1
-            visit(n, a)
-            a[mu] = 0
-        elif nu > mu + 1:
-            if (a[nu] + sigma) % 2 == 1:
-                for v in f(mu, nu - 1, 0, n, a):
-                    yield v
-            else:
-                for v in b(mu, nu - 1, 0, n, a):
-                    yield v
-            while a[nu] < mu - 1:
-                a[nu] = a[nu] + 1
-                if (a[nu] + sigma) % 2 == 1:
-                    for v in f(mu, nu - 1, 0, n, a):
-                        yield v
-                else:
-                    for v in b(mu, nu - 1, 0, n, a):
-                        yield v
-            if (mu + sigma) % 2 == 1:
-                a[nu - 1] = 0
-            else:
-                a[mu] = 0
-        if mu == 2:
-            visit(n, a)
-        else:
-            for v in b(mu - 1, nu - 1, (mu + sigma) % 2, n, a):
-                yield v
-
-    n = len(ns)
-    a = [0] * (n + 1)
-    for j in range(1, m + 1):
-        a[n - m + j] = j - 1
-    return f(m, n, 0, n, a)
-
-from projectEuler import product
-
-def minimumSum(n, d):
-	for r in range(1,len(n)):
-		for c in algorithm_u(n,r):
-
-			k = product(n) - sum([product(d) for d in c])
-			print(n, c, k, [product(d) for d in c])
-			if d[k+len(c)] > product(n):
-				d[k+len(c)] = product(n)
-
+from PE_basic import product
 
 def problem88():
-	GOAL = 6
-	minimalProductSums = {k:GOAL**2 for k in range(0,GOAL*2)}
-	print(minimalProductSums)
-	for n in genFactors(GOAL*2):
-		print(n)
-		minimumSum(n, minimalProductSums)
-	for k in minimalProductSums:
-		print(k, minimalProductSums[k])
+    d = {k:10**8 for k in range(1,12000+1)}
+    def candidates(a, l, p, s):
+        m = len(l)
+        if a == 1: maximum = a
+        else: maximum = a+1
+        for b in range(1,maximum):
+            newL = l + [b]
+            k = m+1 + p*b - (s+b)
+            if k > 12000: return
+            d[k] = min(d[k], p*b)
+            candidates(b,newL,p*b, s+b)
+    for a in range(2,1453):
+        candidates(a,[a],a, a)
+    return sum({d[k] for k in d if k>1})
 
-
-
+from cProfile import run
 if __name__ == "__main__":
-	print(problem88())
+    run("problem88()")
+    print(problem88() == 7587457)
  

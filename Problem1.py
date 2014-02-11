@@ -19,7 +19,8 @@ def problem1():
 	multiplesOf15 = 15*sumsOfFirstIntegers(GOAL//15)
 	return multiplesOf3 + multiplesOf5 - multiplesOf15
 
-import cProfile
+from cProfile import run
 if __name__ == "__main__":
+	run("problem1()")
 	print(problem1() == 233168)
-	cProfile.run("problem1()")
+	
