@@ -10,7 +10,7 @@ What is the smallest positive number that is evenly divisible by all of the numb
 from PE_basic import lcmm
 
 def problem5():
-	return lcmm(*range(1,20))
+	return lcmm(range(1,20))
 
 from cProfile import run
 if __name__ == "__main__":

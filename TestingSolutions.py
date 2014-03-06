@@ -61,20 +61,20 @@ d = {1: (233168, True),
 59: (107359, True),
 60: (26033, True), # Do not work on this!
 61: (28684, True),
-62: (127035954683, True), ## Needs a lot of work
+62: (127035954683, True), 
 63: (49, True),
 64: (1322, True),
 65: (272, True), 
-#66: (-1, True), ## Not done
+66: (661, True), 
 67: (7273, True),
-#68: (6531031914842725, True), ## Broken somehow
+68: (6531031914842725, True),
 69: (510510, True), ## Can be improved using a factor generated
 70: (8319823, True), 
 71: (428570, True), 
 72: (303963552391, True),
 73: (7295372, True),
 74: (402, True),
-75: (-1, True), 
+75: (161667, True), 
 76: (190569291, True), 
 77: (71, True),
 78: (55374, True), ## Needs work
@@ -82,27 +82,44 @@ d = {1: (233168, True),
 80: (40886, True),
 81: (427337, True), 
 82: (260324, True), 
+83: (425185, True),
+84: (101524, True),
 85: (2772, True),
+86: (1818, True),
+87: (1097343, True),
+88: (7587457, True),
 89: (743, True),
+90: (1217, True),
+91: (14234, True),
+92: (8581146, True),
+93: (1258, True),
+94: (518408346, True),
+95: (14316, True),
+96: (24702, True),
+97: (8739992577, True),
 98: (18769, True),
+99: (709, True),
 100: (756872327473, True),
+101: (756872327473, True),
 102: (228, True),
 103: (20313839404245, True), # My solution to this problem is garbage
 104: (329468, True), 
 105: (73702,True), ### NEEDS work
+106: (21384,True),
 112: (1587000, True), 
 119: (248155780267521, True), 
 123: (21035, True),
 141: (878454337159,True), ## Needs work
 142: (1006193, True), ## Needs clean up
 197: (1.710637717, True),
+205: (0.5731441,True),
 206: (1389019170, True)}
 
 
 from importlib import import_module
 from timeit import timeit
 from itertools import dropwhile
-for problem in dropwhile(lambda x: x< 0, d):
+for problem in dropwhile(lambda x: x<81, d):
 	if d[problem][1]:
 		TestAction = import_module("Problem"+str(problem))
 		function = getattr(TestAction,"problem"+str(problem))

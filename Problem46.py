@@ -1,7 +1,7 @@
 
 # Problem 46
 # The number was much smaller than I though: 5777
-from primes import rwh_primes2
+from PE_primes import primesUpTo
 
 def isSquare(apositiveint):
   x = apositiveint // 2
@@ -13,7 +13,7 @@ def isSquare(apositiveint):
   return True
 
 def problem46():
-	primesList = rwh_primes2(10**4)
+	primesList = primesUpTo(10**4)
 	for l in range(1,10**4):
 		n = 2*l + 1
 		flag = True

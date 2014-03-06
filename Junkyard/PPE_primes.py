@@ -144,17 +144,19 @@ def divisorsFromFactors(factors):
 	return set(divisors)
 
 	
-def iPrime( ):
+def iPrime(start=0, step=1):
+	''' count(start=0, step=1) --> count object
+	Return a count object whose .__next__() method returns consecutive primes values'''
 	from itertools import count
-	'''Yields the sequence of prime numbers via the Sieve of Eratosthenes.'''
-	D = {  }  # map each composite integer to its first-found prime factor
+	D = {}  # map each composite integer to its first-found prime factor
 	# To speed things up, we deal with 2 as a special case
 	yield 2
 	for q in count(3,2):     # q gets 3, 5, 7, ... ad infinitum
 		p = D.pop(q, None)
 		if p is None:
 			# q not a key in D, so q is prime, therefore, yield it
-			yield q
+			if q >= start and q % step == 0:
+				yield q
 			# mark q squared as not-prime (with q as first-found prime factor)
 			D[q*q] = q
 		else:
@@ -198,6 +200,7 @@ class TestSequenceFunctions(unittest.TestCase):
 			self.assertEqual(p,primes[index])
 			if index == len(primes)-1:
 				break
+		
 	def test_divisors(self):
 		self.assertEqual(divisors(6), {1, 2, 3, 6})
 		self.assertEqual(divisors(60),{1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30,60})

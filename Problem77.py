@@ -37,30 +37,35 @@ def problem77():
 		if r >= 5000:
 			return(i)
 
-def numberOfWaysa(n,primeList,maximum):
-	from PE_primes import isPrime
-	from itertools import dropwhile
-	count = 0
-	if n <= 3:
-		return 0
-	#primeList = checker[0:max]
-	#primeList.reverse()
-	for p in dropwhile(lambda x: x>=maximum, primeList[::-1]):
-		if n -p <= 0: continue
-		if isPrime(n-p) and n-p <= p:
-			count += 1
-		count += numberOfWaysa(n-p,primeList,p)
-	return count
-
-def problem77a():
+from PE_primes import isPrime
+from itertools import dropwhile
+def problem77():
 	from PE_primes import primesUpTo
 	primeList = list(primesUpTo(30000))
 	record = 0
+	def numberOfWaysa(n,maximum,_d={(3,3):1,(3,2):0,(2,2):1}):
+		if (n,maximum) in _d:
+			return _d[(n,maximum)]
+		count = 0
+		if isPrime(n) and isPrime(maximum):
+			count += 1
+		for p in dropwhile(lambda x: x>=maximum or n-x <=0, primeList[::-1]):
+			#if n -p <= 0: continue
+			#if isPrime(n-p) and n-p <= p:
+			#	print(n,p)
+			#	count += 1
+			count += numberOfWaysa(n-p,p)
+		_d[(n,maximum)] = count
+		return count
+	print("**",numberOfWaysa(71,71))
+	
 	for i in range(1,100):
-		r = numberOfWaysa(i,primeList,i)
-		if r >= 5000:
-			return(i)
-
+		r = numberOfWaysa(i,i)
+		if r >= 110:
+			return i
+	
+from cProfile import run
 if __name__ == "__main__":
-	print(problem77a())
+	run("problem77()")
+	print(problem77())
  

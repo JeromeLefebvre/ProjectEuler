@@ -20,7 +20,7 @@ Find the product of the coefficients, a and b, for the quadratic expression that
 '''
 
 from itertools import product
-from factorGenerating import orderedlist
+from PE_factors import orderedlist
 from PE_primes import isPrime, primesUpTo
 
 def problem27():

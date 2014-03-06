@@ -13,7 +13,7 @@ Find the sum of all the positive integers which cannot be written as the sum of 
 
 from projectEuler import generateFactors,isAbudantFromFactors
 from itertools import combinations_with_replacement
-from factorGenerating import genFactors
+from PE_factors import genFactors
 from MillerRabin import isPrime
 from itertools import chain, combinations
 

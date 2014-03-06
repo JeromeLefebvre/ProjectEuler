@@ -11,9 +11,8 @@ It can be verified that T285 = P165 = H143 = 40755.
 Find the next triangle number that is also pentagonal and hexagonal.
 '''
 
-from projectEuler import solveIntegerQuadratic, isTriangle, isPentagonal,isHexagonal
-from PE_sequences import iPentagonal, iHexagonal, iTriangle
-
+from projectEuler import solveIntegerQuadratic
+from PE_sequences import iPentagonal, iHexagonal, iTriangle,isTriangle, isPentagonal,isHexagonal
 
 def problem45():
 	# We go over all hexagonals as it is the sequence that increases the most

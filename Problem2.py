@@ -13,10 +13,43 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 As F_n = [\phi^n / 5**(1/2)] i.e. the closests integer two \phi^n / 5**(1/2)]
 Then F_n < GOAL if n < (6 * log(40) + 1/2log(5))/log(phi)
 '''
-from PE_sequences import fib, phi
+
+# Problem 2 is about Fibonacci numbers
+
+'''
+There is no good way to define constants.
+Even in the math module
+>>> import math
+>>> math.e
+2.718281828459045
+>>> math.e = 5134
+>>> math.e
+5134
+e is just a 
+'''
+
+def PHI(n=2):
+	''' PHI(int) -> Decimal -- returns (1+√5)/2 to int precision, increasing the precision of Decimal if required'''
+	from decimal import getcontext,Decimal
+	if n > getcontext().prec:
+		getcontext().prec = n
+	s5 = Decimal(5).sqrt()
+	return (1 + s5)/2
+
+def PHI2(n=2):
+	''' PHI(int) -> Decimal -- returns (1+√5)/2 to int precision, increasing the precision of Decimal if required'''
+	from decimal import Context,Decimal
+	dot100 = Context(prec=n)
+	d5 = Decimal(5)
+	s5 = d5.sqrt(dot100)
+	return (1 + s5)/2
+
+# Read all the decimal documentation
+from PE_sequences import fib
 from math import log
 
 def problem2():
+	phi = PHI2(400)
 	upperBound = int((6*log(10) + log(4) + 1/2*log(5))/log(phi))
 	# The +1 is to fix Fib so that we are dealing with the sequence Project euler uses
 	return sum([fib(i+1) for i in range(1,upperBound+1) if fib(i+1)%2 == 0])
@@ -24,4 +57,4 @@ def problem2():
 import cProfile
 if __name__ == "__main__":
 	print(problem2() == 4613732)
-	cProfile.run("problem2()")
+	#cProfile.run("problem2()")

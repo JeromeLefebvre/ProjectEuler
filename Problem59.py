@@ -45,7 +45,7 @@ def decrypt(key):
 			decrypted.append(letter)
 	return decrypted
 
-def problem59a():
+def problem59():
 	for d in permutations([chr(i) for i in range(97,97+26)],3):
 		decrypted = decrypt(d)
 		if decrypted:
@@ -56,6 +56,6 @@ def problem59a():
 
 from cProfile import run
 if __name__ == "__main__":
-	run("problem59a()")
-	print(problem59a() == 107359)
+	run("problem59()")
+	print(problem59() == 107359)
 	

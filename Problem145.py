@@ -49,6 +49,17 @@ def problem145():
 	#count2 = sum([1 for i in range(1,10**6) if isReversible(i) and (i)% 10 != 0])
 	return count*2
 
+def problem145():
+	count = 0
+	for i in range(1,10):
+		if i % 4 ==1:
+			count += 0
+		elif i % 2 == 0:
+			count += 20*30**(i//2-1)
+		else:
+			count += 5*20*(25*20)**(i//4)
+	return count
+
 if __name__ == "__main__":
-	print(problem145())
+	print(problem145() == 608720)
  

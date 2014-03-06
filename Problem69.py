@@ -24,8 +24,8 @@ This can easily be improved, as the max phi is simply a product of primes
 '''
 from projectEuler import phiFromFactors
 from PE_basic import product
+from PE_factors import genProducts
 
-from factorGenerating import genProducts
 def problem69():
 	#checker = primes(save=True,initial=False)
 	record = 0

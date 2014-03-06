@@ -83,28 +83,33 @@ Problem 94
 '''
 Notes on problem 94():
 '''
-from projectEuler import *
-from PE_quadratics import isSquare
-
+#https://gist.github.com/jakedobkin/1575590
 def problem94():
+	limit = 10**9
 	total = 0
-	for a in range(1,10**6):
-		#if (3*a**2 - 2*a - 1) % 4 == 0 and isSquare((3*a**2 - 2*a - 1)):
-		if isSquare((3*a**2 - 2*a - 1)):
-			p = 3*a + 1
-			if p < 10**6:
-				total += p
-		#if (3*a**2 + 2*a - 1) % 4 == 0 and 
-		if isSquare((3*a**2 + 2*a - 1)):
-			p = 3*a - 1
-			if p < 10**6:
-				total += p		
-	return total
+	# a, a-1
+	a,c = 1,1
+	a,c = 7*a-8*c+2, -6*a+7*c-2
+	while 3*a-1 < limit:
+		area = (a-1)*c/4
+		if area == int(area):
+			total += 3*a-1
+		a, c = 7*a-8*c+2, -6*a+7*c-2	
 
+	# a, a+1 case
+	a,c = 1, 0
+	a,c = 7*a - 8*c - 2, -6*a + 7*c + 2
+	while 3*a - 1 < limit:
+		area = (a+1)*c/4
+		if area == int(area):
+			total += 3*a+1		
+		a,c = 7*a - 8*c - 2, -6*a + 7*c + 2
+
+	return total-2 # Remove degenerate solutions
 
 from cProfile import run
 if __name__ == "__main__":
-	print(problem94())
+	print(problem94() == 518408346)
 	run("problem94()")
  
  

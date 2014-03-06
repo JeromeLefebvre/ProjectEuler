@@ -9,15 +9,15 @@ Problem 131
 '''
 Notes on problem 131():
 '''
-from projectEuler import *
+#from projectEuler import *
 from itertools import count
-from MillerRabin import isPrime
-from SolvingQuadratics import isSquare
+#from MillerRabin import isPrime
+#from SolvingQuadratics import isSquare
 from itertools import combinations
 def iCube(maximum=10**10):
 	for n in count():
 		yield n**3
-from factorGenerating import genFactors
+#from factorGenerating import genFactors
 
 def squaresFromDivisors(div):
 	return [d for d in div if isSquare(d)]
@@ -52,7 +52,7 @@ def problem131():
 				primes.add((a**3 - n**3) // n**2)
 				break
 
-from projectEuler import factorize
+#from projectEuler import factorize
 def problem131a():
 	count = 0
 	for a in range(1,10**5):
@@ -63,6 +63,26 @@ def problem131a():
 			n = isSquare(a3 // k)
 			if n and k-n >0 and isPrime(k - n):
 				print(k-n)
+
+from PE_primes import primesUpTo, isPrime, factorize
+from factorGenerating import genProducts
+from itertools import count
+from PE_basic import product
+
+def problem131():
+	seen = 0
+	for m in count(2):
+		factors = set(factorize(m))
+		n = m**3
+		for k in range(0,n,product(factors)**2):
+			if any( k % p != 0 for p in factors): continue
+			if k % product(factors) != 0: print(k)
+			if (n**3 - k**3) % n**2 == 0 and isPrime((n**3 - k**3) // n**2):
+				p = (n**3 - k**3) // n**2
+				if p > 10**6:
+					return seen
+				print(n, p, k)
+				seen += 1
 
 if __name__ == "__main__":
 	print(problem131())

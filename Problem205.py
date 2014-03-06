@@ -15,19 +15,31 @@ What is the probability that Pyramidal Pete beats Cubic Colin? Give your answer 
 '''
 Notes on problem 205():
 '''
-from projectEuler import primes
 from random import randint
+from collections import defaultdict
+
+def sums(maxPips, numberOfDices):
+	sums = defaultdict(int)
+	def waysToSumTo(dicesLeft=numberOfDices, soFar=0):
+		if dicesLeft == 0:
+			sums[soFar] += 1
+		else:
+			for pip in range(1,maxPips+1):
+				waysToSumTo(dicesLeft-1, soFar + pip)
+	waysToSumTo()
+	return sums
 
 def problem205():
+	peter = sums(4,9)
+	colin = sums(6,6)
+	totalGames = (4**9) * (6**6)
 	wins = 0
-	for n in range(1,10**6):
-		p = sum( [ randint(1,4) for i in range(1,10) ] )
-		c = sum( [ randint(1,6) for i in range(1,7) ] )
-		if p > c:
-			wins += 1
-	print(wins/n)
+	for C in range(0, 36+1):
+	    for P in range (C+1, 36+1):
+	        wins += peter[P]*colin[C]
+	return round(wins/totalGames,7)
 
 
 if __name__ == "__main__":
-	print(problem205())
+	print(problem205() == 0.5731441)
  

@@ -13,7 +13,7 @@ Evaluate the sum of all the amicable numbers under 10000.
 
 from projectEuler import generateFactors
 from itertools import combinations
-from factorGenerating import genFactors
+from PE_factors import genFactors
 
 from PE_basic import product
 from PE_primes import divisors, sigma

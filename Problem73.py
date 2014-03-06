@@ -100,8 +100,12 @@ def problem73c():
 		nextGen(tree)
 	print(len( tree) - 2)
 
+# Think of using: http://keyzero.wordpress.com/2010/04/09/project-euler-problem-73/
+# or http://en.wikipedia.org/wiki/Farey_sequence#Next_term
+def problem73():
+	return sum(1 for d in range(2, 12001) for n in range(d//3, d//2+1) if (n*3 > d) and (n*2 < d) and gcd(n, d) == 1)
 from cProfile import run
 if __name__ == "__main__":
-	print(problem73())
-	print(problem73c())# == 7295372)
-	#run("problem73()")
+	print(problem73() == 7295372)
+	#print(problem73())# == 7295372)
+	run("problem73()")
