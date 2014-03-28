@@ -17,6 +17,8 @@ Notes on problem 77():
 '''
 #from projectEuler import primes
 
+from PE_primes import isPrime, primesUpTo, factorize
+
 def numberOfWays(n,checker,max):
 	count = 0
 	if n <= 3:
@@ -24,22 +26,21 @@ def numberOfWays(n,checker,max):
 	primeList = checker[0:max]
 	primeList.reverse()
 	for p in primeList:
-		if checker.isPrime(n-p) and n-p <= p:
+		if isPrime(n-p) and n-p <= p:
 			count += 1
 		count += numberOfWays(n-p,checker,p)
 	return count
 
 def problem77():
-	checker = primes(save=True,initial=False)
+	checker = list(primesUpTo(5000))
 	record = 0
 	for i in range(1,100):
 		r = numberOfWays(i,checker,i)
 		if r >= 5000:
 			return(i)
 
-from PE_primes import isPrime
 from itertools import dropwhile
-def problem77():
+def problem77a():
 	from PE_primes import primesUpTo
 	primeList = list(primesUpTo(30000))
 	record = 0
@@ -63,9 +64,34 @@ def problem77():
 		r = numberOfWaysa(i,i)
 		if r >= 110:
 			return i
+
+from memoize import memoize
+@memoize
+def sopf(n):
+	if n == 1:
+		return 1
+	return sum(set(factorize(n)))
+
+@memoize
+def kappa(n):
+	if n == 0:
+		return 1
+	if n == 1:
+		return 0
+	total = sum(sopf(j)*kappa(n-j) for j in range(1,n+1) )
+	return total/n
+
+from itertools import count
+def problem77():
+	print(kappa(11))
 	
+	for n in count(1):
+		print(n,kappa(n))
+		if kappa(n) > 5000:
+			return n
+
 from cProfile import run
 if __name__ == "__main__":
-	run("problem77()")
+	#run("problem77()")
 	print(problem77())
  

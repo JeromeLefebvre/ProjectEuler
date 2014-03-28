@@ -20,13 +20,13 @@ Find the product of the coefficients, a and b, for the quadratic expression that
 '''
 
 from itertools import product
-from PE_factors import orderedlist
+from OrderedList import Orderedlist
 from PE_primes import isPrime, primesUpTo
 
 def problem27():
 	record = 0
 	ab = 0
-	checker = orderedlist(primesUpTo(1998))
+	checker = Orderedlist(primesUpTo(1998))
 	# We know there is a record of 80
 	# this removes many possibilities for low values of b
 	# since the most number of primes for f(n) is b-1

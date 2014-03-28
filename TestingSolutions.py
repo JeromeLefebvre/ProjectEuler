@@ -76,7 +76,7 @@ d = {1: (233168, True),
 74: (402, True),
 75: (161667, True), 
 76: (190569291, True), 
-77: (71, True),
+77: (71, False), # Needs testing
 78: (55374, True), ## Needs work
 79: (73162890, True), 
 80: (40886, True),
@@ -119,7 +119,7 @@ d = {1: (233168, True),
 from importlib import import_module
 from timeit import timeit
 from itertools import dropwhile
-for problem in dropwhile(lambda x: x<81, d):
+for problem in dropwhile(lambda x: x<1, d):
 	if d[problem][1]:
 		TestAction = import_module("Problem"+str(problem))
 		function = getattr(TestAction,"problem"+str(problem))
