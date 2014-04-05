@@ -44,38 +44,29 @@ class board:
 			self.action(self.chance.draw())
 
 	def action(self, spot):
+		if spot == 'BLANK':
+			return
 		if spot in ['JAIL','GO','C1','E3','H2','R1']:
 			self.position = self.spots.index(spot)
-			self.history[self.spots[self.position]] += 1
 		elif spot == '-3':
 			self.position -= 3
 			if self.position < 0:
 				self.position %= 40
-			self.history[self.spots[self.position]] += 1
 		elif spot == 'NR':
 			if 5 < self.position <=15:
 				self.position = 15
-				self.history[self.spots[self.position]] += 1
 			elif 15 < self.position <=25:
 				self.position = 25
-				self.history[self.spots[self.position]] += 1
 			elif 25 < self.position <=35:
 				self.position = 35
-				self.history[self.spots[self.position]] += 1
 			else:
 				self.position = 5
-				self.history[self.spots[self.position]] += 1
 		elif spot == 'NU':
 			if 13 < self.position <=29:
 				self.position = 29
-				self.history[self.spots[self.position]] += 1
 			else:
 				self.position = 13
-				self.history[self.spots[self.position]] += 1
-		elif spot == 'BLANK':
-			pass
-		else:
-			print("missing action",spot)
+		self.history[self.spots[self.position]] += 1
 
 	def statistic(self):
 		history = [ (self.history[key],key) for key in self.history ]
