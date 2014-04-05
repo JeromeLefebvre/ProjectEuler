@@ -1,50 +1,32 @@
 
-# Problem 193
-from operator import mul
-from functools import reduce
-from primes import rwh_primes2, gen_primes
-from itertools import combinations
+from PE_primes import muUpTo_abs
 
-def prod(args):
-	return reduce(mul,args)
+def Q(n):
+	''' Computes the number of square free numbers'''
+	mu = muUpTo_abs(int(n**(1/2.0)))
+	total = 0
+	for d in range(1,int(n**(1/2.0))):
+		total += mu[d]*int(n/(d**2))
+	return total
 
-import itertools
-def erat2( ):
-    D = {  }
-    yield 2
-    for q in itertools.islice(itertools.count(3), 0, None, 2):
-        p = D.pop(q, None)
-        if p is None:
-            D[q*q] = q
-            yield q
-        else:
-            x = p + q
-            while x in D or not (x&1):
-                x += p
-            D[x] = p
-            
-GOAL = 2**50
+#!/usr/local/bin/python3.3
 
-listOfPrimes = []
-for p in gen_primes():
-	if p < GOAL:
-		listOfPrimes.append(p)
-	else:
-		break
+'''
+http://projecteuler.net/problem=193
+Squarefree Numbers
+Problem 193
 
-maxTau = 1
-while True:
-	if prod(listOfPrimes[0:maxTau + 1]) < GOAL:
-		maxTau += 1
-	else:
-		break
+'''
 
-count = 0
-for lengthOfTuples in range(1,maxTau+1):
-	for c in combinations(listOfPrimes,lengthOfTuples):
-		if prod(c) < GOAL:
-			print(c)
-			count += 1
+'''
+Notes on problem 193():
+'''
 
-# The plus 1 is to account for 1
-print(count+1)
+def problem193():
+	return Q(2**50)
+
+
+from cProfile import run
+if __name__ == "__main__":
+	run("problem193()")
+	print(problem193() == 684465067343069) 
