@@ -25,70 +25,35 @@ Find ∑c for c < 120000.
 
 '''
 Notes on problem 127():
+Very slow
 '''
-from projectEuler import primes, gcd, radFromFactors, product, generateFactors, iPrimes
 
-def relPrimeFromFactors(e,f):
-	return not any( p in f for p in set(e))
-
-def relPrimeFirstFactors(e,n):
-	if e == [1]:
-		return True
-	return not any( n % p == 0 for p in set(e))
-
-def radA(n, _d={1:1,2:2,3:3,4:2,5:5}):
-	if n not in _d:
-		_d[n] = radFromFactors(factor(n))
-	return _d[n]
-
-def factor(n, _memo={1: []}):
-    """returns a list of the prime factors of integer n"""
-    if n <= 0: raise ValueError("Can't factor %r" % n)
-    localmemo = {}
-    orgn = n
-    p = iPrimes()  # yields an infinite iterable
-    for x in p:
-        if n in _memo:
-            for k in localmemo:
-                localmemo[k].extend(_memo[n])
-            _memo.update(localmemo)
-            return _memo[orgn]
-        localmemo[n] = []
-        while n % x == 0:
-            n = n//x
-            for k in localmemo:
-                localmemo[k].append(x)
-        if n == 0:
-        	return 1
-
+from PE_factors import genFactors
+from PE_basic import product
 
 def problem127():
-	checker = primes(save=True,initial=False)
-	GOAL = 120000  # 60
-	total = 0
-	count = 0
-	#global knowPrimes
-	#knowPrimes = rwh_primes2(GOAL//2 + 1)
-	#for d in generateFactors(GOAL, checker):
-	for prod in generateFactors(GOAL,checker):
-		c = product(prod)
-		radc = product(set(prod))
-		for a in [n for n in range(1,c//2) if not any( n % p == 0 for p in set(prod))]:
+    GOAL = 120000
 
-			#for e in generateFactors(c//2, checker,genOne=True):
-			#a = product(e)
-			# we now have b > a, a + b = c
-			b = c - a
-			#print(a,b,c)
-			#f all([relPrimeFromFactors(d,e), relPrimeFirstFactors(e,b), relPrimeFirstFactors(d,b)]) and radFromFactors(e)*checker.rad(b)*radFromFactors(d) < c:
-			#if all([relPrimeFromFactors(d,e), gcd(a,b), relPrimeFirstFactors(d,b)]) and radFromFactors(e)*checker.rad(b)*radFromFactors(d) < c:
-			radb = radA(b)
-			if radb < c/radc and radb*radA(a)*radc < c:
-				total += c
-				count += 1
-	return total, count
+    rad = {}  # rad[6] = {2,3}, radn[8] = {2}
+    for primes in genFactors(GOAL):
+        rad[product(primes)] = (set(primes), product(set(primes)))
+
+    def relprime(s, t):
+        return s & t == set()
+
+    found = 0
+    total = 0
+    for b in range(1, GOAL):
+        for a in range(1, min(b, GOAL - b)):
+            c = a + b
+            x, y, z = rad[a], rad[b], rad[c]
+            if x[0] & y[0] != set():
+                continue
+            if x[1] * y[1] * z[1] < c:
+                found += 1
+                total += c
+    return total
 
 
 if __name__ == "__main__":
-	print(problem127())
- 
+    print(problem127() == 18407904)
