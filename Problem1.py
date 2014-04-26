@@ -1,4 +1,3 @@
-#!/usr/local/bin/python3.3
 '''
 Problem 1
 If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -6,17 +5,14 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 Find the sum of all the multiples of 3 or 5 below 1000.
 '''
 
-from PE_sequences import triangle as sumsOfFirstIntegers
+from PE_sequences import triangle as sumN
 
 def problem1():
-	# Need to remove 1 since we aren't including 1000
-	GOAL = 1000-1
+	GOAL = 1000-1 # below 1000
 	# Inclusion/exclusion
-	# Find all the multiples of 3, 5 and 15
-	# then sum up all the 3s and 5s then remove the comons 15
-	multiplesOf3 = 3*sumsOfFirstIntegers(GOAL//3)
-	multiplesOf5 = 5*sumsOfFirstIntegers(GOAL//5)
-	multiplesOf15 = 15*sumsOfFirstIntegers(GOAL//15)
+	multiplesOf3 = 3*sumN(GOAL//3)
+	multiplesOf5 = 5*sumN(GOAL//5)
+	multiplesOf15 = 15*sumN(GOAL//15)
 	return multiplesOf3 + multiplesOf5 - multiplesOf15
 
 from cProfile import run
