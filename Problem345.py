@@ -6,6 +6,7 @@ Problem 345
 
 '''
 Notes on problem 345():
+Very easy done using the Munkres module which implements the http://en.wikipedia.org/wiki/Hungarian_algorithm
 '''
 
 from munkres import Munkres
@@ -30,8 +31,11 @@ def problem345():
 	data = [ [int(a) for a in line.split(' ') if a != ''] for line in rawdata.split('\n')]
 	maximum  = max( max(a) for a in data)
 	munk = Munkres()
+	# By default the Hungarian algorithm solves to find the minimum
+	# You can modify it to solve for the max by changing the original matrix 
+	# by maximum - entry, thus the largest old entry is the smallest new entry
 	modified = [ [maximum - a for a in line] for line in data]
-	p = munk.compute(modified)
+	p = munk.compute(modified) # A list of matrix indicies.
 	total = 0
 	for l in p:
 		total += data[l[0]][l[1]]
