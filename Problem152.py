@@ -31,6 +31,30 @@ def problem152():
 	find()
 	return count
 
+from functools import lru_cache
+
+@lru_cache(maxsize=100)
+def remainingSum(i):
+	return sum([1/j**2 for j in range(i+1, 45+1)])
+
+
+@lru_cache(maxsize=10**6)
+def search(i, partial):
+	if partial == 1/2:
+		return 1
+	if partial > 1/2:
+		return 0
+	remaining = remainingSum(i)
+	if remaining + partial < 1/2:
+		return 0
+	total = 0
+	for j in range(i+1, 45+1):
+		total += search(j, partial+1/j**2)
+	return total 
+
+def problem152():
+	return search(2,1/2**2)
+
 
 from cProfile import run
 if __name__ == "__main__":

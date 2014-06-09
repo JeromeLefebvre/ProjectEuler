@@ -4,7 +4,7 @@
 from collections import Counter
 
 def problem54():
-    pairs = [line.split() for line in open("054.txt")]
+    pairs = [line.split() for line in open("Problem054.txt")]
     values = {r:i for i,r in enumerate('23456789TJQKA')}
     def hand_cmp(hand):
         comp = list(zip(*sorted(((v, values[k]) for k,v in list(Counter(x[0] for x in hand).items())), reverse=True)))

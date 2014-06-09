@@ -45,7 +45,7 @@ def orthogonalIntersection(v,w,p):
 def problem102():
 	count = 0
 	zero = vector(0,0)
-	with open('102.txt','r') as data:
+	with open('Problem102.txt','r') as data:
 		for l in data.readlines():
 			x0,x1,y0,y1,z0,z1 = l.split(',')
 			X, Y, Z = vector(x0,x1),vector(y0,y1),vector(z0,z1)
