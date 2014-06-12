@@ -115,16 +115,17 @@ d = {1: (233168, True),
 205: (0.5731441,True),
 206: (1389019170, True)}
 
-
+def problem_name(n):
+	return '0'*(3-len(str(n))) + str(n)
 from importlib import import_module
 from timeit import timeit
 from itertools import dropwhile
 for problem in dropwhile(lambda x: x<1, d):
 	if d[problem][1]:
-		TestAction = import_module("Problem"+str(problem))
-		function = getattr(TestAction,"problem"+str(problem))
+		TestAction = import_module("Problem"+problem_name(problem))
+		function = getattr(TestAction,"problem"+problem_name(problem))
 		time = timeit(function, number=10)/10
 		print("Problem " + str(problem) + " Ran in " + str(time))
 		# Check if the problem still has a valid solution
 		if function() != d[problem][0]:
-			print("issue with problem " + str(problem))
+			print("issue with problem " + problem_name(problem))

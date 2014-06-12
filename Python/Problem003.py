@@ -11,7 +11,7 @@ What is the largest prime factor of the number 600851475143 ?
 '''
 Notes on problem 3():
 '''
-from PE_primes import factorize
+from pe.primes import factorize
 
 def problem3():
 	return max(factorize(600851475143))

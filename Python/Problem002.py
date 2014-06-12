@@ -45,7 +45,7 @@ def PHI2(n=2):
 	return (1 + s5)/2
 
 # Read all the decimal documentation
-from PE_sequences import fib
+from pe.sequences import fib
 from math import log
 
 def problem2():
