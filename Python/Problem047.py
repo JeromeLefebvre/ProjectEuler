@@ -1,11 +1,7 @@
 #!/usr/local/bin/python3.3
 
-
-# DONE, solution is 134043
-
 '''
 http://projecteuler.net/problem=47()
-## Needs improvements
 Distinct primes factors
 Problem 47
 The first two consecutive numbers to have two distinct prime factors are:
@@ -25,30 +21,14 @@ Find the first four consecutive integers to have four distinct prime factors. Wh
 '''
 Notes on problem 47():
 '''
-#from projectEuler import primes
-
-def problem47():
-	checker = primes(save=True,initial=False)
-	candidates = []
-	i = 2
-	while True:
-		if len(set(checker.factors(i))) == 4:
-			candidates.append(i)
-			if len(candidates) == 4:
-				return candidates[0]
-		else:
-			candidates = []
-		i += 1
-
-
-from PE_primes import factorize
 from itertools import count
+
+from pe.primes import factorize
+
+
 def problem47():
 	candidates = []
-	numbers = count()
-	# Throw away zero
-	next(numbers)
-	for n in numbers:
+	for n in count(1):
 		if len(set(factorize(n))) == 4:
 			candidates.append(n)
 			if len(candidates) == 4:

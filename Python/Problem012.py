@@ -20,7 +20,7 @@ What is the value of the first triangle number to have over five hundred divisor
 
 '''
 
-from PE_primes import sigma
+from pe.primes import sigma
 
 def problem12():
 	for n in range(8000,10000000):

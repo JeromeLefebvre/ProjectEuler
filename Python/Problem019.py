@@ -27,5 +27,5 @@ def problem19():
 
 from cProfile import run
 if __name__ == "__main__":
-	print(problem19())
+	print(problem19() == 171)
 	run("problem19()")

@@ -8,7 +8,7 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 Find the sum of all the primes below two million.
 '''
 
-from PE_primes import primesUpTo
+from pe.primes import primesUpTo
 def problem10():
 	return sum(primesUpTo(2*10**6))
 

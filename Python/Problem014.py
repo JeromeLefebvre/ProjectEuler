@@ -18,7 +18,7 @@ Which starting number, under one million, produces the longest chain?
 NOTE: Once the chain starts the terms are allowed to go above one million
 '''
 
-from PE_digits import collatzLength
+from pe.digits import collatzLength
 
 def problem14():
 	return max((collatzLength(n),n) for n in range(1,10**6,2))[1]

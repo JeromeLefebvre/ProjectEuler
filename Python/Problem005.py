@@ -7,7 +7,7 @@ Problem 5
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 '''
 
-from PE_basic import lcmm
+from pe.basic import lcmm
 
 def problem5():
 	return lcmm(range(1,20))

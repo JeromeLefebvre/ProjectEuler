@@ -20,16 +20,10 @@ In the first one-thousand expansions, how many fractions contain a numerator wit
 '''
 Notes on problem 57():
 '''
-from PE_digits import numberOfDigits
-from functools import reduce
 from fractions import Fraction
+
 def f(a):
 	return 1 + 1/(1+a)
-
-def compose(*functions):
-    def compose2(f, g):
-        return lambda x: f(g(x))
-    return reduce(compose2, functions)
 
 def problem57():
 	count = 0
@@ -40,18 +34,8 @@ def problem57():
 			count += 1
 	return count
 
-def problem57a():
-	count = 0
-	a = Fraction(1)
-	for i in range(1,1000):
-		a = f(a)
-		if numberOfDigits(a.denominator) < numberOfDigits(a.numerator):
-			count += 1
-	return count	
-	
-from cProfile import run
+
 if __name__ == "__main__":
-	print(problem57())
+	print(problem57() == 153)
+	from cProfile import run
 	run("problem57()")
-	print(problem57a())
-	run("problem57a()")	

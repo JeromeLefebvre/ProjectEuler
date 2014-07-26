@@ -28,16 +28,14 @@ Find the value of D ≤ 1000 in minimal solutions of x for which the largest val
 '''
 Notes on problem 66():
 '''
-from projectEuler import isSquare
-from PE_quadratics import pell
-from math import sqrt
 
+from pe.quadratics import pell
+from pe.sequences import isSquare
 
 def problem66():
 	return max([(pell(D),D) for D in range(1,1000) if not isSquare(D)])[1]
 
-from cProfile import run
 if __name__ == "__main__":
 	print(problem66() == 661)
-	run("problem66()")
- 
+	from cProfile import run
+	run("problem66()") 

@@ -10,37 +10,30 @@ There are exactly four non-trivial examples of this type of fraction, less than 
 If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
 '''
 
-def easyFraction(a,b):
-	if str(a)[0] == str(b)[0]:
-		if a/b == int(str(a)[1])/int(str(b)[1]):
-			return True
-	if str(a)[1] == str(b)[0]:
-		if a/b == int(str(a)[0])/int(str(b)[1]):
-			return True
-	if str(a)[0] == str(b)[1]:
-		if a/b == int(str(a)[1])/int(str(b)[0]):
-			return True
-	if str(a)[1] == str(b)[1]:
-		if a/b == int(str(a)[0])/int(str(b)[0]):
-			return True
-	return False	
-
-from PE_basic import product
 from fractions import gcd
+
+from pe.basic import product
+
+# Using that not 0 == 1 and not 1 == 0
+def easyFraction(a, b):
+    for x, y in ((0, 0), (1, 0), (0, 1), (1, 1)):
+        if str(a)[x] == str(b)[y]:
+            if a / b == int(str(a)[not x]) / int(str(b)[not y]):
+                return True
+    return False
+
 def problem33():
-	# a/b
-	found = []
-	for a in range(10,100):
-		for b in range(a+1,100):
-			if not b%10 == 0 and easyFraction(a,b):
-				found.append((a,b))
-	a = product([d[0] for d in found])
-	b = product([d[1] for d in found])
-	return b// gcd(a,b)
+    # a/b
+    found = []
+    for a in range(10, 100):
+        for b in range(a + 1, 100):
+            if not b % 10 == 0 and easyFraction(a, b):
+                found.append((a, b))
+    a = product([d[0] for d in found])
+    b = product([d[1] for d in found])
+    return b // gcd(a, b)
 
 from cProfile import run
 if __name__ == "__main__":
-	print(problem33() == 100)
-	run("problem33()")
- 
-
+    print(problem33() == 100)
+    run("problem33()")

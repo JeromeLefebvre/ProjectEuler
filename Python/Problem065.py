@@ -29,29 +29,29 @@ Find the sum of digits in the numerator of the 100th convergent of the continued
 Notes on problem 65():
 '''
 
-def continueFractions(frac,a):
-	return frac + 1/a
+
+def continueFractions(frac, a):
+    return frac + 1 / a
 
 from fractions import Fraction
-
 import math
 
+
 def problem65():
-	n = 101 # number of iterations
-	x = Fraction(0,1)
-	for i in range(n, 0, -1):
-	    if i % 3 == 1:
-	        j = int(i / 3) * 2
-	    else:
-	        j = 1
+    n = 101  # number of iterations
+    x = Fraction(0, 1)
+    for i in range(n, 0, -1):
+        if i % 3 == 1:
+            j = int(i / 3) * 2
+        else:
+            j = 1
 
-	    x = Fraction(1,1) / (x + j)
+        x = Fraction(1, 1) / (x + j)
 
-	return sum([int(s) for s in str((x + 1).numerator)])
+    return sum([int(s) for s in str((x + 1).numerator)])
 
 
-from cProfile import run
 if __name__ == "__main__":
-	print(problem65() == 272)
-	run("problem65()")
- 
+    print(problem65() == 272)
+    from cProfile import run
+    run("problem65()")

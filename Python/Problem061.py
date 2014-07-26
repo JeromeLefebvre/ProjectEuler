@@ -21,7 +21,7 @@ Find the sum of the only ordered set of six cyclic 4-digit numbers for which eac
 '''
 Notes on problem 61():
 '''
-from PE_sequences import iPentagonal, iHexagonal, iTriangle,iSquare,iHeptagonal,iOctagonal
+from pe.sequences import iPentagonal, iHexagonal, iTriangle,iSquare,iHeptagonal,iOctagonal
 
 from itertools import product, permutations
 def problem61():
@@ -56,6 +56,6 @@ def problem61():
 
 from cProfile import run
 if __name__ == "__main__":
-	print(problem61())
+	print(problem61() == 28684)
 	run("problem61()")
  

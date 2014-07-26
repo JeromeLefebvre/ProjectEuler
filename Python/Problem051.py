@@ -15,20 +15,25 @@ is if there is multiple of 3 replacements that have to tbe done.
 Furthermore, if we are looking for the smallest element, then the digit to replace has to be 0,1,2.
 '''
 
-from PE_primes import isPrime, primesUpTo
+from pe.primes import isPrime, primesUpTo
 
-def primes8(m,i):
-	return len([s for s in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] if m.replace(i,s)[0] != '0' and isPrime(int(m.replace(i,s)))]) == 8
+
+def primes8(m, i):
+    def primeCheck(i,s):
+        return isPrime(int(m.replace(i, s)))
+    digits = [str(i) for i in range(0,10)]
+    return len([s for s in digits if m.replace(i, s)[0] != '0' and primeCheck(i,s)]) == 8
+
 
 def problem51():
-	primes = primesUpTo(10**7)
-	for p in primes[1229:]:
-		m = str(p)
-		for i in ['0','1','2']:
-			if m.count(i) == 3 and primes8(m,i):
-				return p
+    primes = primesUpTo(10 ** 7)
+    for p in primes[1229:]:
+        m = str(p)
+        for i in ['0', '1', '2']:
+            if m.count(i) == 3 and primes8(m, i):
+                return p
 
-from cProfile import run
 if __name__ == "__main__":
-	print(problem51() == 121313)
-	run("problem51()")
+    print(problem51() == 121313)
+    from cProfile import run
+    run("problem51()")

@@ -11,7 +11,7 @@ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 '''
 
-from PE_primes import divisors
+from pe.primes import divisors
 
 def problem9():
 	''' We know that a + b + c = 2*m**2 + 2*m*n thus 2m divides 1000 or m is a divisor of 500'''

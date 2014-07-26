@@ -18,7 +18,7 @@ Notes on problem 73():
 '''
 
 from fractions import gcd
-from PE_basic import product
+from pe.basic import product
 def relPrimeFromFactors(n,d):
 	for p in set(n):
 		if p in d:

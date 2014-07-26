@@ -7,7 +7,7 @@ Problem 16
 What is the sum of the digits of the number 2**1000?
 '''
 
-from PE_digits import applyToDigits
+from pe.digits import applyToDigits
 
 def problem16():
 	return applyToDigits(2**1000)

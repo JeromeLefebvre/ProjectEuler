@@ -92,6 +92,6 @@ def problem17():
 
 from cProfile import run
 if __name__ == "__main__":
-    print(problem17())
+    print(problem17() == 21124)
     run("problem17()")
 

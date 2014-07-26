@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.3
+#!/usr/local/bin/python3.4.1
 
 '''
 http://projecteuler.net/problem=36
@@ -11,46 +11,25 @@ Find the sum of all numbers, less than one million, which are palindromic in bas
 (Please note that the palindromic number, in either base, may not include leading zeros.)
 '''
 
+from itertools import combinations_with_replacement, permutations
 
-
-def isBinaryPalindrome(n):
-	'''Returns True if a number is a palindrome in base 2'''
-	return bin(n)[2:][::-1] == bin(n)[2:]
-
-def numberFromlist(c):
-	total = 0
-	n = 0
-	for a in c:
-		total += a*10**(len(c) - n - 1)
-		n += 1
-	return total
+from pe.digits import numberFromlist
+from pe.sequences import isBinaryPalindrome
 
 def problem36():
-	from itertools import combinations_with_replacement, permutations
-	# we have some duplicates 
-	seen = set()
-	for n in range(1,4):
-		for c in combinations_with_replacement(range(0,10),n):
-			for d in permutations(c,n):
-				m = numberFromlist(d + d[::-1])
-				if isBinaryPalindrome(m):
-					seen.add(m)
-				m = numberFromlist(d[:-1] + d[::-1])
-				if isBinaryPalindrome(m):
-					seen.add(m)
-	return sum(seen)
-
-def problem36a():
-	from projectEuler import isPalindrome, isBinaryPalindrome
-	# need to only check odd numbers as even numbers can never be bianry palidromes
-	return sum([i for i in range(1,10**6,2) if isPalindrome(i) and isBinaryPalindrome(i)])
-
+    seen = set()
+    for n in range(1, 4):
+        for c in combinations_with_replacement(range(0, 10), n):
+            for d in permutations(c, n):
+                m = numberFromlist(d + d[::-1])
+                if isBinaryPalindrome(m):
+                    seen.add(m)
+                m = numberFromlist(d[:-1] + d[::-1])
+                if isBinaryPalindrome(m):
+                    seen.add(m)
+    return sum(seen)
 
 from cProfile import run
 if __name__ == "__main__":
-	print(problem36() == 872187)
-	run("problem36()")
-	print(problem36a()) 
-	print(problem36a() == 872187)
-	run("problem36a()")	
- 
+    print(problem36() == 872187)
+    run("problem36()")

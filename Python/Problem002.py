@@ -51,6 +51,7 @@ from math import log
 def problem2():
 	phi = PHI2(5)
 	upperBound = int((6*log(10) + log(4) + 1/2*log(5))/log(phi))
+	print(upperBound)
 	# The +1 is to fix Fib so that we are dealing with the sequence Project euler uses
 	return sum([fib(i+1) for i in range(1,upperBound+1) if fib(i+1)%2 == 0])
 

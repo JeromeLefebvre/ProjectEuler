@@ -12,7 +12,7 @@ How many such routes are there through a 20×20 grid?
 # starting from the first row and then then couting what happens
 # so in the box with coordinates x,y there is C(x+y,x) ways of getting there
 
-from PE_basic import nCk
+from pe.basic import nCk
 def problem15():
 	return nCk(20+20,20)
 

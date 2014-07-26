@@ -27,5 +27,5 @@ def problem164():
 
 from cProfile import run
 if __name__ == "__main__":
-    # run("problem164()")
+    run("problem164()")
     print(problem164() == 378158756814587)

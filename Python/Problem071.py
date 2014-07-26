@@ -17,7 +17,6 @@ By listing the set of reduced proper fractions for d ≤ 1,000,000 in ascending 
 Notes on problem 71():
 Using Fractions seems temping, but much too slow
 '''
-from projectEuler import gcd
 from fractions import Fraction
 
 def problem71a():

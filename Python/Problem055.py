@@ -24,7 +24,7 @@ NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretica
 '''
 Notes on problem 55():
 '''
-from projectEuler import isPalindrome, isLychrel
+from pe.sequences import isLychrel, isPalindrome
 
 def problem55():
 	return sum([1 for i in range(1,10000) if isLychrel(i)])

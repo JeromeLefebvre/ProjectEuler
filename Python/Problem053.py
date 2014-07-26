@@ -22,7 +22,7 @@ How many, not necessarily distinct, values of  nCr, for 1 ≤ n ≤ 100, are gre
 '''
 Notes on problem 53():
 '''
-from PE_basic import nCk
+from pe.basic import nCk
 
 def problem53():
 	count = 0

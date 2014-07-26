@@ -16,19 +16,22 @@ It is interesting to note that the odd squares lie along the bottom right diagon
 
 If one complete new layer is wrapped around the spiral above, a square spiral with side length 9 will be formed. If this process is continued, what is the side length of the square spiral for which the ratio of primes along both diagonals first falls below 10%?
 '''
+from itertools import count
+
+from pe.primes import isPrime
+
 
 def problem58():
-	from PE_primes import isPrime
-	from itertools import count
-	#checker = projectEuler.primes(save=True,initial=False)
-	primes = 0
-	for shell in count(1):
-		# We only need to check the 4 cornes and there is an easy formula to generate all of them
-		primes += sum( 1 for i in range(1,4) if isPrime((2*shell + 1)**2 - 2*i*shell))
-		if primes/(4*shell + 1) < 0.10:
-			return 2*shell + 1
+    primes = 0
+    for shell in count(1):
+        # We only need to check the 4 cornes and there is an easy formula to
+        # generate all of them
+        primes += sum(1 for i in range(1, 4)
+                      if isPrime((2 * shell + 1) ** 2 - 2 * i * shell))
+        if primes / (4 * shell + 1) < 0.10:
+            return 2 * shell + 1
 
-from cProfile import run
 if __name__ == "__main__":
-	print(problem58() == 26241)
-	run("problem58()")
+    print(problem58() == 26241)
+    from cProfile import run
+    run("problem58()")

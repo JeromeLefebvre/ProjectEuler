@@ -41,7 +41,7 @@ I have no patience for continued fractions
 
 
 import math
-from projectEuler import isSquare as is_square
+from pe.sequences import isSquare
 def CF_of_sqrt(n):
     """ Compute the continued fraction representation of the
         square root of N.
@@ -56,7 +56,7 @@ def CF_of_sqrt(n):
         In the section named: "Methods of finding continued
         fractions for square roots"
     """
-    if is_square(n):
+    if isSquare(n):
         return [int(math.sqrt(n))]
 
     ans = []
@@ -89,7 +89,7 @@ def problem64():
 			hasOddPeriod += 1
 	return hasOddPeriod
 
-from cProfile import run
 if __name__ == "__main__":
     print(problem64() == 1322)
+    from cProfile import run
     run("problem64()")

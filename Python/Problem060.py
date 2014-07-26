@@ -6,7 +6,7 @@ The primes 3, 7, 109, and 673, are quite remarkable. By taking any two primes an
 
 Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
 '''
-from PE_primes import isPrime,iPrime
+from pe.primes import isPrime,iPrime
 
 def remarkable(p,q):
 	return isPrime(int(str(q) + str(p))) and isPrime(int(str(p) + str(q)))

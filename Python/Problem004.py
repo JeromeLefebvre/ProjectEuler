@@ -8,7 +8,7 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 Find the largest palindrome made from the product of two 3-digit numbers.
 '''
 
-from PE_digits import isPalindrome
+from pe.digits import isPalindrome
 
 # A palidrome made of 6 digits is an divisible by 11
 # As abccba = a*10**5 + b*10**4 + c*10**3 + c*10**2 + b*10 + a = -a + b - c + c - b + a = 0 mod 11

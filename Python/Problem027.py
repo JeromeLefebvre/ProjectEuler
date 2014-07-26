@@ -20,58 +20,32 @@ Find the product of the coefficients, a and b, for the quadratic expression that
 '''
 
 from itertools import product
-from OrderedList import Orderedlist
-from PE_primes import isPrime, primesUpTo
+
+from pe.orderedList import Orderedlist
+from pe.primes import isPrime, primesUpTo
+
 
 def problem27():
-	record = 0
-	ab = 0
-	checker = Orderedlist(primesUpTo(1998))
-	# We know there is a record of 80
-	# this removes many possibilities for low values of b
-	# since the most number of primes for f(n) is b-1
-	for b in checker[80:1000]:
-		for p1 in checker[0:1000+b+1]:
-			a = p1 - b - 1
-			n = 2
-			p2 = a + p1 + (2*n -1)
-			while isPrime(abs(p2)):
-				n += 1
-				p2 = a + p2 + (2*n - 1)
-			if n > record:
-				record = n
-				ab = a*b
-	return ab
+    record = 0
+    ab = 0
+    checker = Orderedlist(primesUpTo(1998))
+    # We know there is a record of 80
+    # this removes many possibilities for low values of b
+    # since the most number of primes for f(n) is b-1
+    for b in checker[80:1000]:
+        for p1 in checker[0:1000 + b + 1]:
+            a = p1 - b - 1
+            n = 2
+            p2 = a + p1 + (2 * n - 1)
+            while isPrime(abs(p2)):
+                n += 1
+                p2 = a + p2 + (2 * n - 1)
+            if n > record:
+                record = n
+                ab = a * b
+    return ab
 
-def problem27a():
-	# Here we avoid using the ordered list but it only slows things down.
-	record = 0
-	ab = 0
-	primes = primesUpTo(1998)
-	# We know there is a record of 80
-	# this removes many possibilities for low values of b
-	# since the most number of primes for f(n) is b-1
-	for b in primes:
-		if b > 1000:
-			break
-		for p1 in primes:
-			if p1 > 1000+b+1:
-				break
-			a = p1 - b - 1
-			n = 2
-			p2 = a + p1 + (2*n -1)
-			while isPrime(abs(p2)):
-				n += 1
-				p2 = a + p2 + (2*n - 1)
-			if n > record:
-				record = n
-				ab = a*b
-	return ab
-
-from cProfile import run
 if __name__ == "__main__":
-	#print(problem27())
-	print(problem27() == -59231)
-	run("problem27()")
-	print(problem27a() == -59231)
-	run("problem27a()")	
+    print(problem27() == -59231)
+    from cProfile import run
+    run("problem27()")

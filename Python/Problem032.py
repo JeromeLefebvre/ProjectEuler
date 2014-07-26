@@ -10,25 +10,21 @@ Find the sum of all products whose multiplicand/multiplier/product identity can 
 HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 '''
 
-def isPandigital(i,j):
-	word = str(i) + str(j) + str(i*j)
-	return set(word) == {str(i) for i in range(1,10)} and len(word) == 9
+from pe.sequences import isPandigital
 
-from math import log
+
 def problem32():
-	seen = set()
-	# the bounds are base on need to have certain number of digits
-	# and estimate (using log) how many digits the output would have
-	for i in range(1,50):
-		for j in range(i+50,2000):
-			if isPandigital(i,j):
-				seen.add(i*j)
-	return sum(seen)
+    seen = set()
+    # the bounds are base on need to have certain number of digits
+    # and estimate (using log) how many digits the output would have
+    for i in range(1, 50):
+        for j in range(i + 50, 2000):
+            if isPandigital(i, j):
+                seen.add(i * j)
+    return sum(seen)
 
 
-from cProfile import run
 if __name__ == "__main__":
-	print(problem32() == 45228)
-	run("problem32()")
- 
-
+    print(problem32() == 45228)
+    from cProfile import run
+    run("problem32()")

@@ -22,23 +22,31 @@ Find the value of n ≤ 1,000,000 for which n/φ(n) is a maximum.
 Notes on problem 69():
 This can easily be improved, as the max phi is simply a product of primes
 '''
-from projectEuler import phiFromFactors
-from PE_basic import product
-from PE_factors import genProducts
+from pe.basic import product
+from pe.factors import genProducts
+
+
+def phiFromFactors(factors):
+    if factors == []:
+        return 0
+    ph = 1
+    for p in set(factors):
+        ph *= p ** factors.count(p) - p ** (factors.count(p) - 1)
+    return ph
+
 
 def problem69():
-	#checker = primes(save=True,initial=False)
-	record = 0
-	for n in genProducts(10**6, [2, 5, 7, 3, 11, 13, 17,19,21]):
-		if product(n) == 1: continue
-		phi = product(n)/phiFromFactors(n)
-		if phi > record:
-			record = phi
-			recordN = n
-	return product(recordN)
+    record = 0
+    for n in genProducts(10 ** 6, [2, 5, 7, 3, 11, 13, 17, 19, 21]):
+        if product(n) == 1:
+            continue
+        phi = product(n) / phiFromFactors(n)
+        if phi > record:
+            record = phi
+            recordN = n
+    return product(recordN)
 
-from cProfile import run
 if __name__ == "__main__":
-	print(problem69())
-	print(problem69() == 510510)
-	run("problem69()")
+    print(problem69() == 510510)
+    from cProfile import run
+    run("problem69()")

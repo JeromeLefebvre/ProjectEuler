@@ -26,21 +26,23 @@ Using the numbers 1 to 10, and depending on arrangements, it is possible to form
 '''
 Notes on problem 68():
 '''
-from itertools import combinations,permutations
+from itertools import combinations, permutations
+
 
 def problem68():
-	# outter ring
-	found = []
-	for b in combinations(range(1,11),5):
-		# inner ring
-		for c in permutations(b,5):
-			for d in permutations(set(range(1,11)).difference(c),5):
-				if len(set(c[i] + d[i] + d[(i + 1) % 5] for i in range(0,5))) == 1:
-					index = c.index(min(c))
-					found.append(int(''.join([str(c[(index + i)%5]) + str(d[(index + i)%5]) + str(d[(index + i + 1)%5])  for i in range(0,5)])))
-	return max([f for f in found if len(str(f)) == 16])
+    # outter ring
+    found = []
+    for b in combinations(range(1, 11), 5):
+        # inner ring
+        for c in permutations(b, 5):
+            for d in permutations(set(range(1, 11)).difference(c), 5):
+                if len(set(c[i] + d[i] + d[(i + 1) % 5] for i in range(0, 5))) == 1:
+                    index = c.index(min(c))
+                    found.append(
+                        int(''.join([str(c[(index + i) % 5]) + str(d[(index + i) % 5]) + str(d[(index + i + 1) % 5]) for i in range(0, 5)])))
+    return max([f for f in found if len(str(f)) == 16])
 
 if __name__ == "__main__":
-	print(problem68())
-	print(problem68() == 6531031914842725)
- 
+    print(problem68() == 6531031914842725)
+    from cProfile import run
+    run("problem68()")

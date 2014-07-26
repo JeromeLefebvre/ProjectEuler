@@ -15,17 +15,16 @@ It can be verified that the sum of the numbers on the diagonals is 101.
 What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 '''
 
+
 def problem28():
-	GOAL = 1001
-	total = 0
-	for shell in range(1,(GOAL - 1)//2+1):
-		for i in range(0,4):
-			total += (2*shell + 1)**2 - 2*i*shell
-	return total+1
+    GOAL = 1001
+    total = 0
+    for shell in range(1, (GOAL - 1) // 2 + 1):
+        for i in range(0, 4):
+            total += (2 * shell + 1) ** 2 - 2 * i * shell
+    return total + 1
 
-from cProfile import run
 if __name__ == "__main__":
-	print(problem28()== 669171001)
-	run("problem28()")
-
-
+    print(problem28() == 669171001)
+    from cProfile import run
+    run("problem28()")
