@@ -1,2 +1,5 @@
 
 *.pyc
+
+# MacOS
+.DS_Store
