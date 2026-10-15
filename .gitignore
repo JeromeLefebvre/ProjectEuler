@@ -1,5 +1,4 @@
 
-*.pyc
-
 # MacOS
 .DS_Store
+Python/.DS_Store
